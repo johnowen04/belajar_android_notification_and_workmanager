@@ -5,7 +5,7 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import com.example.belajarandroiddatabinding.util.buildDB
 
-@Database(entities = arrayOf(Todo::class), version = 3)
+@Database(entities = arrayOf(Todo::class), version = 4)
 abstract class TodoDatabase: RoomDatabase() {
     abstract fun todoDao(): TodoDao
 

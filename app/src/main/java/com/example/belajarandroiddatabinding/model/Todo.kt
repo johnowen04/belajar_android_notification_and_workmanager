@@ -13,7 +13,9 @@ data class Todo(
     @ColumnInfo(name = "priority")
     var priority: Int,
     @ColumnInfo(name = "is_done")
-    var isDone: Int = 0
+    var isDone: Int = 0,
+    @ColumnInfo(name = "todo_date")
+    var todoDate: Int
 ) {
     @PrimaryKey(autoGenerate = true)
     var uuid: Int = 0

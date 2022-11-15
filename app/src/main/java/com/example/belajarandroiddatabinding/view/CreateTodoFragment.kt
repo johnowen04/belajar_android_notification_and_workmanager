@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.example.belajarandroiddatabinding.R
 import com.example.belajarandroiddatabinding.model.Todo
+import com.example.belajarandroiddatabinding.util.NotificationHelper
 import com.example.belajarandroiddatabinding.viewmodel.DetailTodoViewModel
 import kotlinx.android.synthetic.main.fragment_create_todo.*
 
@@ -44,6 +45,12 @@ class CreateTodoFragment : Fragment() {
             viewModel.addTodo(list)
             Toast.makeText(view.context, "Data added", Toast.LENGTH_SHORT).show()
             Navigation.findNavController(it).popBackStack()
+
+            NotificationHelper(view.context)
+                .createNotification(
+                    "Todo Created",
+                    "A new todo has been created. Stay focused!"
+                )
         }
     }
 }

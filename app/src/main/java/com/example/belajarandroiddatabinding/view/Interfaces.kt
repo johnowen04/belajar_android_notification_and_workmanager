@@ -19,3 +19,7 @@ interface RadioButtonListener {
 interface TodoSaveChangesListener {
     fun onSaveChangeClick(view: View, todo: Todo)
 }
+
+interface TodoAddClickListener {
+    fun onAddClickListener(view: View)
+}

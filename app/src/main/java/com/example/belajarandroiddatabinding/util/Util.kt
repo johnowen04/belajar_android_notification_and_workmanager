@@ -14,9 +14,15 @@ val MIGRATION_1_2 = object: Migration(1, 2) {
     }
 }
 
+val MIGRATION_2_3 = object: Migration(2, 3) {
+    override fun migrate(database: SupportSQLiteDatabase) {
+        database.execSQL("ALTER TABLE todo ADD COLUMN is_done INTEGER DEFAULT 0 NOT NULL")
+    }
+}
+
 fun buildDB(context: Context): TodoDatabase =
     Room.databaseBuilder(context.applicationContext,
         TodoDatabase::class.java,
         DB_NAME)
-        .addMigrations(MIGRATION_1_2)
+        .addMigrations(MIGRATION_1_2, MIGRATION_2_3)
         .build()

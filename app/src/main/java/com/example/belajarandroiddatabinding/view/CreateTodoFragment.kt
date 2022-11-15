@@ -9,11 +9,17 @@ import android.widget.RadioButton
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
+import androidx.work.OneTimeWorkRequest
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
+import androidx.work.workDataOf
 import com.example.belajarandroiddatabinding.R
 import com.example.belajarandroiddatabinding.model.Todo
 import com.example.belajarandroiddatabinding.util.NotificationHelper
+import com.example.belajarandroiddatabinding.util.TodoWorker
 import com.example.belajarandroiddatabinding.viewmodel.DetailTodoViewModel
 import kotlinx.android.synthetic.main.fragment_create_todo.*
+import java.util.concurrent.TimeUnit
 
 class CreateTodoFragment : Fragment() {
     private lateinit var viewModel: DetailTodoViewModel
@@ -46,11 +52,25 @@ class CreateTodoFragment : Fragment() {
             Toast.makeText(view.context, "Data added", Toast.LENGTH_SHORT).show()
             Navigation.findNavController(it).popBackStack()
 
+            /*
             NotificationHelper(view.context)
                 .createNotification(
                     "Todo Created",
                     "A new todo has been created. Stay focused!"
                 )
+             */
+
+            val myWorkRequest = OneTimeWorkRequestBuilder<TodoWorker>()
+                .setInitialDelay(5, TimeUnit.SECONDS)
+                .setInputData(
+                    workDataOf(
+                        "TITLE" to "Todo Created",
+                        "CONTENT" to "A new todo has been created. Stay focused!"
+                    )
+                )
+                .build()
+
+            WorkManager.getInstance(requireContext()).enqueue(myWorkRequest)
         }
     }
 }

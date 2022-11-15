@@ -23,3 +23,9 @@ interface TodoSaveChangesListener {
 interface TodoAddClickListener {
     fun onAddClickListener(view: View)
 }
+
+interface TodoSetDueListener {
+    fun onDateClick(view: View)
+
+    fun onTimeClick(view: View)
+}

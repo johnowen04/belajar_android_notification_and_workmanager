@@ -15,7 +15,7 @@ data class Todo(
     @ColumnInfo(name = "is_done")
     var isDone: Int = 0,
     @ColumnInfo(name = "todo_date")
-    var todoDate: Int
+    var todoDate: Int = 0
 ) {
     @PrimaryKey(autoGenerate = true)
     var uuid: Int = 0
